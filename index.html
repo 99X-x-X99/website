@@ -3,31 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ПРАВДА — Головні новини</title>
+    <title>НОВИНИ — Головні новини</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="header">
         <div class="container">
             <div class="header-flex">
-                <div class="logo">ПРАВДА</div>
+                <div class="logo">НОВИНИ</div>
                 <nav class="nav">
                     <div id="theme-toggle" class="theme-btn" onclick="toggleTheme()" title="Змінити тему">
                         🌙
                     </div>
-                    
                     <div class="lang-switcher">
                         <a href="#" id="lang-uk" class="lang-link active" onclick="changeLanguage('uk')">УКР</a>
                         <div class="lang-divider"></div>
                         <a href="#" id="lang-en" class="lang-link" onclick="changeLanguage('en')">ENG</a>
                     </div>
-
                     <a href="https://ab3.support/?ea4d-da8cfce0=9df77237-4ae0-4433-bedc-a781669ecac2" target="_blank" class="support-link">
                         <button class="btn-support" id="btn-support">ПІДТРИМАТИ</button>
                     </a>
                 </nav>
             </div>
-
             <nav class="category-nav">
                 <div class="nav-container" id="category-menu">
                     <a href="#" onclick="loadNews('all')">УСІ</a>
@@ -41,14 +38,12 @@
             </nav>
         </div>
     </header>
-
     <main class="container main-grid">
         <aside class="sidebar">
             <h2 class="sidebar-title" id="sidebar-label">ОСТАННІ НОВИНИ</h2>
             <div id="news-feed" class="news-feed">
                 </div>
         </aside>
-
         <section class="content">
             <div id="full-article">
                 <h1 id="a-title" class="article-title">Завантаження...</h1>
@@ -57,10 +52,8 @@
             </div>
         </section>
     </main>
-
     <script src="script.js"></script>
     <script>
-        // Невеличкий скрипт для перевірки теми при першому завантаженні (щоб не було "блимання" білим)
         if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-mode');
             document.getElementById('theme-toggle').innerText = '☀️';

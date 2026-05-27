@@ -1,22 +1,18 @@
-/* ==========================================================================
-   1. ЗМІННІ ТА ОСНОВНІ НАЛАШТУВАННЯ
-   ========================================================================== */
 :root {
-    --bg-color: #f4f4f4;    /* Світло-сірий фон для всього сайту */
-    --header-bg: #ffffff;   /* Чисто білий верх */
+    --bg-color: #f4f4f4;    
+    --header-bg: #ffffff;   
     --text-color: #1a1a1a;
     --text-secondary: #555555;
     --border-color: #e0e0e0;
-    --nav-bg: #ffffff;      /* Біла навігація */
+    --nav-bg: #ffffff;      
     --accent-color: #e01e1e;
     --icon-border: #000000;
     --transition: 0.3s ease;
     
     --input-bg: #ffffff;
     --input-text: #1a1a1a;
-    --card-bg: #ffffff;     /* Фон карток (статей/адмінки) */
+    --card-bg: #ffffff;     
 }
-
 body.dark-mode {
     --bg-color: #121212;
     --header-bg: #1a1a1a;
@@ -30,13 +26,11 @@ body.dark-mode {
     --input-text: #ffffff;
     --card-bg: #1a1a1a;
 }
-
 * { 
     margin: 0; 
     padding: 0; 
     box-sizing: border-box; 
 }
-
 body { 
     font-family: 'Segoe UI', Arial, sans-serif; 
     background-color: var(--bg-color); 
@@ -44,29 +38,22 @@ body {
     line-height: 1.6;
     transition: background-color var(--transition), color var(--transition);
 }
-
 .container { 
     max-width: 1200px; 
     margin: 0 auto; 
     padding: 0 20px; 
 }
-
-/* ==========================================================================
-   2. HEADER & NAVIGATION
-   ========================================================================== */
 .header { 
     background-color: var(--header-bg); 
     padding: 15px 0 0 0; 
-    border-bottom: none; /* Видаляємо, бо є межа в навігації */
+    border-bottom: none; 
 }
-
 .header-flex { 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
     margin-bottom: 15px;
 }
-
 .logo { 
     font-size: 28px; 
     font-weight: 900; 
@@ -75,9 +62,7 @@ body {
     text-transform: uppercase;
     text-decoration: none;
 }
-
 .nav { display: flex; align-items: center; }
-
 .theme-btn {
     cursor: pointer;
     font-size: 20px;
@@ -86,14 +71,12 @@ body {
     transition: transform 0.2s;
 }
 .theme-btn:hover { transform: scale(1.2); }
-
 .lang-switcher {
     display: flex;
     gap: 12px;
     margin-right: 25px;
     align-items: center;
 }
-
 .lang-link {
     text-decoration: none;
     color: var(--text-secondary);
@@ -102,7 +85,6 @@ body {
     text-transform: uppercase;
 }
 .lang-link.active { color: var(--text-color); }
-
 .btn-support { 
     background: var(--accent-color); 
     color: white; 
@@ -115,22 +97,19 @@ body {
     transition: opacity 0.2s;
 }
 .btn-support:hover { opacity: 0.9; }
-
 .category-nav {
     width: 100%;
     background-color: var(--nav-bg);
     border-top: 1px solid var(--border-color);
     border-bottom: 2px solid var(--accent-color); 
     padding: 10px 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Тінь для відділення від сірого низу */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
-
 .nav-container {
     display: flex;
     justify-content: center; 
     gap: 20px;
 }
-
 .nav-container a {
     color: var(--text-color);
     text-decoration: none;
@@ -139,10 +118,6 @@ body {
     text-transform: uppercase;
 }
 .nav-container a:hover { color: var(--accent-color); }
-
-/* ==========================================================================
-   3. ГЛАВНИЙ ГРІД ТА SIDEBAR
-   ========================================================================== */
 .main-grid { 
     display: grid; 
     grid-template-columns: 320px 1fr; 
@@ -150,12 +125,10 @@ body {
     margin-top: 30px; 
     padding-bottom: 60px;
 }
-
 .sidebar { 
     border-right: 1px solid var(--border-color); 
     padding-right: 20px; 
 }
-
 .sidebar-title { 
     font-size: 13px; 
     color: var(--accent-color); 
@@ -163,7 +136,6 @@ body {
     text-transform: uppercase;
     font-weight: 800;
 }
-
 .news-item { 
     margin-bottom: 12px; 
     padding-bottom: 12px; 
@@ -172,14 +144,12 @@ body {
     gap: 12px; 
     cursor: pointer;
 }
-
 .time { 
     color: var(--text-secondary); 
     font-weight: bold; 
     font-size: 13px; 
     min-width: 45px; 
 }
-
 .news-link { 
     color: var(--text-color); 
     text-decoration: none; 
@@ -188,17 +158,12 @@ body {
     font-weight: 500;
 }
 .news-item:hover .news-link { color: var(--accent-color); }
-
-/* ==========================================================================
-   4. КОНТЕНТ СТАТТІ (Ефект білої картки)
-   ========================================================================== */
 .main-grid > div:last-child {
     background-color: var(--card-bg);
     padding: 35px;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
-
 .article-title { 
     font-size: 32px; 
     margin-bottom: 12px; 
@@ -206,25 +171,21 @@ body {
     line-height: 1.1; 
     font-weight: 800;
 }
-
 .article-info { 
     color: var(--text-secondary); 
     font-size: 12px; 
     margin-bottom: 20px; 
 }
-
 .article-image-container {
     width: 100%;
     margin-bottom: 15px;
 }
-
 .article-image-container img {
     width: 100%;
     height: auto;
     display: block;
     border-radius: 4px;
 }
-
 .photo-caption {
     font-size: 11px;
     color: var(--text-secondary);
@@ -232,7 +193,6 @@ body {
     margin-top: 8px;
     letter-spacing: 0.5px;
 }
-
 .news-footer {
     display: flex;
     justify-content: space-between;
@@ -242,9 +202,7 @@ body {
     border-top: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
 }
-
 .social-icons { display: flex; gap: 10px; }
-
 .icon-file {
     width: 30px !important;
     height: 30px !important;
@@ -255,13 +213,10 @@ body {
     object-fit: contain;
     transition: background 0.2s;
 }
-
 .icon-file:hover { background-color: var(--border-color); }
-
 .views-box { display: flex; align-items: center; gap: 6px; color: var(--text-color); }
 .eye-icon { width: 18px !important; height: auto !important; }
 .views-num { font-size: 14px; font-weight: bold; }
-
 .article-body-text { 
     font-size: 18px; 
     color: var(--text-color); 
@@ -269,21 +224,15 @@ body {
     line-height: 1.7;
     margin-top: 15px;
 }
-
 body.dark-mode .icon-file, 
 body.dark-mode .eye-icon {
     filter: invert(1);
 }
-
-/* ==========================================================================
-   5. ПРОФЕСІЙНА АДМІН-ПАНЕЛЬ + ФІЛЬТРАЦІЯ
-   ========================================================================== */
 .admin-body {
     background-color: var(--bg-color) !important;
     min-height: 100vh;
     padding: 40px 0;
 }
-
 .admin-container {
     max-width: 800px;
     margin: 0 auto;
@@ -293,7 +242,6 @@ body.dark-mode .eye-icon {
     padding: 40px;
     border: 1px solid var(--border-color);
 }
-
 .admin-title {
     color: var(--text-color) !important;
     font-size: 24px;
@@ -304,7 +252,6 @@ body.dark-mode .eye-icon {
     border-bottom: 3px solid var(--accent-color);
     padding-bottom: 10px;
 }
-
 .admin-form label {
     display: block;
     margin-top: 20px;
@@ -315,7 +262,6 @@ body.dark-mode .eye-icon {
     font-weight: bold;
     letter-spacing: 0.5px;
 }
-
 .admin-form input[type="text"],
 .admin-form select,
 .admin-form textarea,
@@ -330,14 +276,12 @@ body.dark-mode .eye-icon {
     outline: none;
     transition: all 0.2s ease;
 }
-
 .admin-form input:focus, 
 .admin-form textarea:focus,
 .admin-filter-form select:focus {
     border-color: var(--accent-color) !important;
     box-shadow: 0 0 8px rgba(224, 30, 30, 0.1);
 }
-
 .btn-publish {
     width: 100%;
     background: var(--accent-color);
@@ -351,23 +295,19 @@ body.dark-mode .eye-icon {
     margin-top: 25px;
     transition: transform 0.2s, background 0.2s;
 }
-
 .admin-news-section { margin-top: 50px; }
-
 .admin-header-flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 25px;
 }
-
 .section-label {
     color: var(--text-color);
     font-size: 18px;
     border-left: 4px solid var(--accent-color);
     padding-left: 15px;
 }
-
 .admin-news-item {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
@@ -378,12 +318,10 @@ body.dark-mode .eye-icon {
     justify-content: space-between;
     align-items: center;
 }
-
 .news-title-preview {
     color: var(--text-color);
     font-size: 14px;
 }
-
 .btn-delete {
     color: #ff4d4d !important;
     text-decoration: none;
@@ -396,15 +334,10 @@ body.dark-mode .eye-icon {
     background: #ff4d4d;
     color: #fff !important;
 }
-
-/* ==========================================================================
-   6. АДАПТИВНІСТЬ
-   ========================================================================== */
 @media (max-width: 992px) {
     .main-grid { grid-template-columns: 1fr; }
     .sidebar { border-right: none; padding-right: 0; margin-bottom: 30px; }
 }
-
 @media (max-width: 600px) {
     .article-title { font-size: 24px; }
     .nav-container { gap: 10px; flex-wrap: wrap; }
