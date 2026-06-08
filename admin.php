@@ -19,9 +19,7 @@
             <option value="ПУБЛІКАЦІЇ">ПУБЛІКАЦІЇ</option>
             <option value="КОЛОНКИ">КОЛОНКИ</option>
             <option value="БЕСІДА">БЕСІДА</option>
-            <option value="СПЕЦПРОЄКТИ">СПЕЦПРОЄКТИ</option>
             <option value="БЛОГИ">БЛОГИ</option>
-            <option value="АРХІВ">АРХІВ</option>
         </select>
         <label>Головне зображення</label>
         <input type="file" name="image" accept="image/*">

@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Europe/Kyiv');
 $host = 'localhost';
 $user = 'root';
 $pass = ''; 
@@ -8,7 +9,7 @@ if (!$link) {
     die("Помилка підключення до бази");
 }
 mysqli_set_charset($link, "utf8mb4");
-$year = 2026; 
+$year = intval(date('Y')); 
 $dates_query = "SELECT DISTINCT DATE(created_at) as news_date FROM news WHERE YEAR(created_at) = $year";
 $dates_result = mysqli_query($link, $dates_query);
 $active_dates = [];
@@ -109,15 +110,16 @@ $months = [
         </div>
     </div>
     <script>
+        const currentYear = <?= $year ?>;
         const archiveTranslations = {
             'uk': { 
-                'title': 'АРХІВ 2026', 
+                'title': `АРХІВ ${currentYear}`, 
                 'back': '← НА ГОЛОВНУ', 
                 'months': ['СІЧЕНЬ', 'ЛЮТИЙ', 'БЕРЕЗЕНЬ', 'КВІТЕНЬ', 'ТРАВЕНЬ', 'ЧЕРВЕНЬ', 'ЛИПЕНЬ', 'СЕРПЕНЬ', 'ВЕРЕСЕНЬ', 'ЖОВТЕНЬ', 'ЛИСТОПАД', 'ГРУДЕНЬ'], 
                 'days': ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'нд'] 
             },
             'en': { 
-                'title': 'ARCHIVE 2026', 
+                'title': `ARCHIVE ${currentYear}`, 
                 'back': '← BACK TO MAIN', 
                 'months': ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'], 
                 'days': ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'] 

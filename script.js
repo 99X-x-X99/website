@@ -10,7 +10,8 @@ const translations = {
         'support': 'ПІДТРИМАТИ',
         'latest': 'НОВИНИ ЗА',
         'published': 'Опубліковано',
-        'not_found': 'Новин не знайдено'
+        'not_found': 'Новин не знайдено',
+        'translating': 'Переклад...'
     },
     'en': {
         'all': 'ALL',
@@ -23,7 +24,8 @@ const translations = {
         'support': 'SUPPORT',
         'latest': 'NEWS FOR',
         'published': 'Published',
-        'not_found': 'No news found'
+        'not_found': 'No news found',
+        'translating': 'Translating...'
     }
 };
 let currentLang = localStorage.getItem('lang') || 'uk';
@@ -39,15 +41,57 @@ function toggleTheme() {
     const currentCat = activeLink ? activeLink.innerText : 'all';
     updateActiveCategory(currentCat);
 }
+const translationCache = new Map();
 async function translateText(text, toLang = 'en') {
-    if (!text || currentLang === 'uk') return text;
+    if (!text || currentLang === 'uk') {
+        return text;
+    }
     try {
-        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=uk&tl=${toLang}&dt=t&q=${encodeURI(text)}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        return data[0].map(item => item[0]).join('');
+        const htmlParts = [];
+        text = text.replace(/<[^>]*>/g, (match) => {
+            const key = `__HTML_${htmlParts.length}__`;
+            htmlParts.push(match);
+            return key;
+        });
+        const memoryKey = `${toLang}_${text}`;
+        if (translationCache.has(memoryKey)) {
+            let cached = translationCache.get(memoryKey);
+            htmlParts.forEach((tag, index) => {
+                cached = cached.replaceAll(`__HTML_${index}__`, tag);
+            });
+            return cached;
+        }
+        const chunks = text.match(/.{1,1500}(\s|$)|.*/g)?.filter(Boolean) || [text];
+        const translatedParts = await Promise.all(
+            chunks.map(async chunk => {
+                if (!chunk.trim()) {
+                    return chunk;
+                }
+                try {
+                    const url =
+                        `https://translate.googleapis.com/translate_a/single?client=gtx&sl=uk&tl=${toLang}&dt=t&q=${encodeURIComponent(chunk)}`;
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        return chunk;
+                    }
+                    const data = await response.json();
+                    return data[0]
+                        .map(item => item[0])
+                        .join('');
+                } catch {
+                    return chunk;
+                }
+            })
+        );
+        let translatedText = translatedParts.join('');
+        htmlParts.forEach((tag, index) => {
+            translatedText =
+                translatedText.replaceAll(`__HTML_${index}__`, tag);
+        });
+        translationCache.set(memoryKey, translatedText);
+        return translatedText;
     } catch (e) {
-        console.error("Translation error:", e);
+        console.error('Translation error:', e);
         return text;
     }
 }
@@ -85,8 +129,9 @@ function renderInterface() {
 async function loadNews(category = 'all') {
     const urlParams = new URLSearchParams(window.location.search);
     const today = new Date();
-    const currentDay2026 = `2026-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-    const dateParam = urlParams.get('date') || currentDay2026;
+    const currentYear = today.getFullYear();
+    const currentDay = `${currentYear}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+    const dateParam = urlParams.get('date') || currentDay;
     try {
         let url = `db.php?action=get_news&date=${dateParam}`;
         const response = await fetch(url);
@@ -138,9 +183,11 @@ async function showFull(item) {
     let displayTitle = item.title;
     let displayContent = item.content;
     if (currentLang === 'en') {
-        titleElem.innerText = "Translating...";
+        titleElem.innerHTML = `<span style="color:gray;">${translations[currentLang].translating}</span>`;
+        bodyElem.innerHTML = "";
         displayCategory = await translateText(displayCategory, 'en');
         displayTitle = await translateText(displayTitle, 'en');
+        console.log(item.content);
         displayContent = await translateText(displayContent, 'en');
     }
     titleElem.innerHTML = `

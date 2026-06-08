@@ -220,9 +220,18 @@ body {
 .article-body-text { 
     font-size: 18px; 
     color: var(--text-color); 
-    white-space: pre-line;
-    line-height: 1.7;
+    line-height: 1.6;
     margin-top: 15px;
+}
+.article-body-text p {
+    margin-top: 0;
+    margin-bottom: 12px; 
+    display: block;
+}
+.article-body-text br {
+    content: "";
+    display: block;
+    margin-bottom: 10px; 
 }
 body.dark-mode .icon-file, 
 body.dark-mode .eye-icon {
